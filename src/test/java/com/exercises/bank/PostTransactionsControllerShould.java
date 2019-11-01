@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
@@ -18,15 +19,16 @@ public class PostTransactionsControllerShould {
     private PostTransactionService service;
 
     private PostTransactionsController controller;
+    private Transaction transaction;
 
     @BeforeEach
     void setUp() {
         controller = new PostTransactionsController(service);
+        transaction = Mockito.mock(Transaction.class);
     }
 
     @Test
     public void return_http_status_201_for_a_valid_transaction() {
-        Transaction transaction = new Transaction();
         ResponseEntity<Void> expectedHttpStatusCode = controller.postTransaction(transaction);
 
         verify(service).storeTransaction(transaction);
@@ -35,7 +37,6 @@ public class PostTransactionsControllerShould {
 
     @Test
     public void return_http_status_204_for_a_non_valid_transaction() {
-        Transaction transaction = new Transaction();
         doThrow(new NonValidTransactionException()).when(service).storeTransaction(transaction);
 
         ResponseEntity<Void> expectedHttpStatusCode = controller.postTransaction(transaction);

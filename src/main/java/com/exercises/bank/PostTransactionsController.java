@@ -3,6 +3,7 @@ package com.exercises.bank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -18,7 +19,7 @@ public class PostTransactionsController {
     }
 
     @PostMapping("transactions")
-    public ResponseEntity<Void> postTransaction(Transaction transaction) {
+    public ResponseEntity<Void> postTransaction(@RequestBody Transaction transaction) {
         try {
             service.storeTransaction(transaction);
 
