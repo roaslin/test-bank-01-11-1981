@@ -14,6 +14,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static java.time.ZoneOffset.UTC;
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PostTransactionsTests {
@@ -56,6 +57,6 @@ class PostTransactionsTests {
                         "}")
                 .post("http://localhost:" + this.port + "/transactions")
                 .then()
-                .statusCode(CREATED.value());
+                .statusCode(NO_CONTENT.value());
     }
 }

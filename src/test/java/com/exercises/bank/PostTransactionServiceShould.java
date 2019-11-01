@@ -28,7 +28,7 @@ class PostTransactionServiceShould {
     @Test
     public void store_a_valid_transaction() {
         long validTimestamp = LocalDateTime.now().minusSeconds(5).toEpochSecond(UTC);
-        Transaction transaction = new Transaction(validTimestamp);
+        Transaction transaction = new Transaction(validTimestamp, 123);
 
         service.storeTransaction(transaction);
 
@@ -38,7 +38,7 @@ class PostTransactionServiceShould {
     @Test
     public void throw_an_non_valid_transaction_exception_for_a_non_valid_transaction() {
         long inValidTimestamp = LocalDateTime.now().minusMinutes(1).toEpochSecond(UTC);
-        Transaction transaction = new Transaction(inValidTimestamp);
+        Transaction transaction = new Transaction(inValidTimestamp, 123);
 
         try {
             service.storeTransaction(transaction);
