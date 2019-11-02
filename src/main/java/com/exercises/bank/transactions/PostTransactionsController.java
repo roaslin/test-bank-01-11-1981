@@ -1,4 +1,4 @@
-package com.exercises.bank;
+package com.exercises.bank.transactions;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

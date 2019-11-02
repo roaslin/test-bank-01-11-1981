@@ -1,4 +1,4 @@
-package com.exercises.bank;
+package com.exercises.bank.transactions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

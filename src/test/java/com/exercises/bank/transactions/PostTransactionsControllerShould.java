@@ -1,4 +1,4 @@
-package com.exercises.bank;
+package com.exercises.bank.transactions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +14,9 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class PostTransactionsControllerShould {
+
+    private static final int NO_CONTENT = 204;
+    private static final int CREATED = 201;
 
     @Mock
     private PostTransactionService service;
@@ -32,7 +35,7 @@ public class PostTransactionsControllerShould {
         ResponseEntity<Void> expectedHttpStatusCode = controller.postTransaction(transaction);
 
         verify(service).storeTransaction(transaction);
-        assertThat(expectedHttpStatusCode.getStatusCodeValue()).isEqualTo(201);
+        assertThat(expectedHttpStatusCode.getStatusCodeValue()).isEqualTo(CREATED);
     }
 
     @Test
@@ -41,6 +44,6 @@ public class PostTransactionsControllerShould {
 
         ResponseEntity<Void> expectedHttpStatusCode = controller.postTransaction(transaction);
 
-        assertThat(expectedHttpStatusCode.getStatusCodeValue()).isEqualTo(204);
+        assertThat(expectedHttpStatusCode.getStatusCodeValue()).isEqualTo(NO_CONTENT);
     }
 }

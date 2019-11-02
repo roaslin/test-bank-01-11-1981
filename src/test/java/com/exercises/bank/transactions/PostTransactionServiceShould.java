@@ -1,4 +1,4 @@
-package com.exercises.bank;
+package com.exercises.bank.transactions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,8 +27,7 @@ class PostTransactionServiceShould {
 
     @Test
     public void store_a_valid_transaction() {
-        long validTimestamp = LocalDateTime.now().minusSeconds(5).toEpochSecond(UTC);
-        Transaction transaction = new Transaction(validTimestamp, 123);
+        Transaction transaction = aValidTransaction();
 
         service.storeTransaction(transaction);
 
@@ -37,13 +36,22 @@ class PostTransactionServiceShould {
 
     @Test
     public void throw_an_non_valid_transaction_exception_for_a_non_valid_transaction() {
-        long inValidTimestamp = LocalDateTime.now().minusMinutes(1).toEpochSecond(UTC);
-        Transaction transaction = new Transaction(inValidTimestamp, 123);
+        Transaction transaction = anInvalidTransaction();
 
         try {
             service.storeTransaction(transaction);
         } catch (NonValidTransactionException ex) {
             assertThat(ex.getClass()).isEqualTo(NonValidTransactionException.class);
         }
+    }
+
+    private Transaction aValidTransaction() {
+        long validTimestamp = LocalDateTime.now().minusSeconds(5).toEpochSecond(UTC);
+        return new Transaction(validTimestamp, 123);
+    }
+
+    private Transaction anInvalidTransaction() {
+        long inValidTimestamp = LocalDateTime.now().minusMinutes(1).toEpochSecond(UTC);
+        return new Transaction(inValidTimestamp, 123);
     }
 }
