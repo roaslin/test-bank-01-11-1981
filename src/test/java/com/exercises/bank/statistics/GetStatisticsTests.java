@@ -55,11 +55,11 @@ class GetStatisticsTests {
         given()
                 .contentType(JSON)
                 .body("{\n" +
-                        "  \"sum\": 100,\n" +
-                        "  \"avg\": 50,\n" +
-                        "  \"max\": 50,\n" +
-                        "  \"min\": 50,\n" +
-                        "  \"count\": 2\n" +
+                        "  \"sum\": 75,\n" +
+                        "  \"avg\": 25,\n" +
+                        "  \"max\": 36,\n" +
+                        "  \"min\": 14,\n" +
+                        "  \"count\": 3\n" +
                         "}\n")
                 .get("http://localhost:" + this.port + "/statistics")
                 .then()
