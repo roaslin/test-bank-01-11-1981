@@ -46,4 +46,37 @@ class GetStatisticsTests {
                 .then()
                 .statusCode(OK.value());
     }
+
+    @Test
+    public void return_statistics() {
+        postValidTransaction();
+        postValidTransaction();
+
+        given()
+                .contentType(JSON)
+                .body("{\n" +
+                        "  \"sum\": 100,\n" +
+                        "  \"avg\": 50,\n" +
+                        "  \"max\": 50,\n" +
+                        "  \"min\": 50,\n" +
+                        "  \"count\": 2\n" +
+                        "}\n")
+                .get("http://localhost:" + this.port + "/statistics")
+                .then()
+                .statusCode(OK.value());
+    }
+
+    private void postValidTransaction() {
+        String timestamp = String.valueOf(LocalDateTime.now().toEpochSecond(UTC));
+
+        given()
+                .contentType(JSON)
+                .body("{\n" +
+                        "  \"amount\": 50.0,\n" +
+                        "  \"timestamp\": " + timestamp + "\n" +
+                        "}")
+                .post("http://localhost:" + this.port + "/transactions")
+                .then()
+                .statusCode(CREATED.value());
+    }
 }

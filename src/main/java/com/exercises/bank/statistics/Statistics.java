@@ -1,14 +1,16 @@
 package com.exercises.bank.statistics;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 @Builder
+@AllArgsConstructor
 public class Statistics {
-    private final double sum;
-    private final double avg;
-    private final double max;
-    private final double min;
-    private final long count;
+    private double sum;
+    private double avg;
+    private double max;
+    private double min;
+    private long count;
 }
